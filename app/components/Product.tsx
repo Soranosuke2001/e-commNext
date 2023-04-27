@@ -1,14 +1,22 @@
-import Image from "next/image"
+import Image from "next/image";
 
-import formatPrice from "@/util/priceFormat"
-import { ProductType } from "@/types/ProductType"
+import formatPrice from "@/util/priceFormat";
+import { ProductType } from "@/types/ProductType";
 
 export default function Product({ name, image, price }: ProductType) {
-    return (
-        <div>
-            <Image className='w-full h-80 object-cover' src={image} alt='product image' width={800} height={800} />
-            <h1>{name}</h1>
-            {formatPrice(price)}
-        </div>
-    )
+  return (
+    <div className="text-gray-700">
+      <Image
+        className="w-full h-80 object-cover rounded-lg"
+        src={image}
+        alt="product image"
+        width={800}
+        height={800}
+      />
+      <div className="font-medium py-2">
+        <h1>{name}</h1>
+        <h2 className="text-sm text-teal-700">{formatPrice(price)}</h2>
+      </div>
+    </div>
+  );
 }
