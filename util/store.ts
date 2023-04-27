@@ -1,20 +1,12 @@
+import { AddCartType } from "@/types/AddCartType";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type CartItem = {
-  name: string;
-  id: string;
-  images?: string[];
-  description?: string;
-  unit_amount: number;
-  quantity: number;
-};
-
 type CartState = {
   isOpen: boolean;
-  cart: CartItem[];
+  cart: AddCartType[];
   toggleCart: () => void;
-  addProduct: (item: CartItem) => void;
+  addProduct: (item: AddCartType) => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -45,7 +37,6 @@ export const useCartStore = create<CartState>()(
             // Once the item is updated, return the updated cart
             return { cart: updatedCart };
           } else {
-            
             // If item is not in cart, add item to cart
             return { cart: [...state.cart, { ...item, quantity: 1 }] };
           }
