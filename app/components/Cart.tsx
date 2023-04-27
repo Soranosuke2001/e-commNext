@@ -34,6 +34,9 @@ export default function Cart() {
             </div>
           </div>
         ))}
+        <button className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white">
+          Checkout
+        </button>
       </div>
     </div>
   );
