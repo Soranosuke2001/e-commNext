@@ -1,5 +1,11 @@
-export default function Product() {
+import Image from "next/image"
+
+export default function Product({ name, image, price }) {
     return (
-        <div>Product Component</div>
+        <div>
+            <Image src={image} alt='product image' width={400} height={400} />
+            <h1>{name}</h1>
+            {price}
+        </div>
     )
 }
