@@ -12,7 +12,7 @@ export default async function Product({ searchParams }: SearchParamType) {
       />
       <div>
         <h1>{searchParams.name}</h1>
-        {/* <p>{searchParams.decription}</p> */}
+        <p>{searchParams.description}</p>
       </div>
     </div>
   );

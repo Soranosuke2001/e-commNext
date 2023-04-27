@@ -1,8 +1,10 @@
 type SearchParams = {
   name: string;
-  price: number | null;
+  unit_amount: number | null;
   image: string;
   id: string;
+  description: string | null;
+  features: string;
 };
 
 type Params = {

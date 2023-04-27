@@ -4,10 +4,20 @@ import formatPrice from "@/util/priceFormat";
 import { ProductType } from "@/types/ProductType";
 import Link from "next/link";
 
-export default function Product({ name, image, unit_amount, id }: ProductType) {
+export default function Product({
+  name,
+  image,
+  unit_amount,
+  id,
+  description,
+  metadata,
+}: ProductType) {
   return (
     <Link
-      href={{ pathname: `/product/${id}`, query: { name, image, price: unit_amount, id } }}
+      href={{
+        pathname: `/product/${id}`,
+        query: { name, image, unit_amount, id, description },
+      }}
     >
       <div className="text-gray-700">
         <Image
