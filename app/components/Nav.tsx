@@ -1,42 +1,35 @@
 "use client";
 
-import { FC } from 'react'
+import { Session } from "next-auth";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
-import { Session } from 'next-auth'
-import { signIn, signOut, useSession } from 'next-auth/react'
-import Image from 'next/image';
+export default function Nav({ user }: Session) {
+  return (
+    <nav className="flex justify-between items-center py-4">
+      <h1>Styled</h1>
+      <ul>
 
-// The type is overwriting the Session type from next-auth since the prop was complaining about the expires property
-type NavProps = Omit<
-    Session,
-    "expires"
-> & {
-    expires: string | undefined | null
+        {/* If the user does not exist, then render the sign in button */}
+        {!user && (
+          <li>
+            <button onClick={() => signIn()}>Sign In</button>
+          </li>
+        )}
+
+        {/* If the user does exist, then render the profile picture */}
+        {user && (
+          <li>
+            <Image
+              className="rounded-full"
+              src={user.image as string}
+              alt={`${user?.name as string}s profile picture`}
+              width={48}
+              height={48}
+            />
+          </li>
+        )}
+      </ul>
+    </nav>
+  );
 }
-
-const Nav: FC<NavProps> = ({ user }) => {
-    return (
-      <nav>
-          <h1>NavBar Component</h1>
-          <ul>
-            <li>Products</li>
-
-            {/* If the user is not signed in, then render a Sign In button */}
-            {!user && (
-                <li>
-                    <button onClick={() => signIn()}>Sign In</button>
-                </li>
-            )}
-
-            {/* If the user exits, render the user image from google */}
-            {user && (
-                <li>
-                    <Image src={user?.image as string} alt={`${user?.name as string}s profile picture`} width={48} height={48} />
-                </li>
-            )}
-          </ul>
-      </nav>
-    )
-}
-
-export default Nav

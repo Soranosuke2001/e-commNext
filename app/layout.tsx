@@ -19,18 +19,12 @@ export default async function RootLayout({
 
   // Check if user is authenticated
   const session = await getServerSession(authOptions)
-
-  const user = {
-    ...session?.user,
-    expires: session?.expires,
-  }
-
-  console.log(session)
-
+  
   return (
     <html lang="en">
       <body className='mx-64' >
-        <Nav user={user} expires={session?.expires as string} />
+        <Nav user={session?.user} expires={session?.expires as string} />
+        <h1>This is the home page</h1>
       </body>
     </html>
   )
