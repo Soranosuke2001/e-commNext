@@ -1,7 +1,6 @@
 "use client";
 
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
 import { useCartStore } from "@/util/store";
 import { useState, useEffect } from "react";
 
@@ -24,6 +23,14 @@ export default function Checkout() {
         items: cartStore.cart,
         payment_intent_id: cartStore.paymentIntent,
       }),
-    });
+    })
+      .then((res) => {
+        console.log(res)
+        // return res.json();
+      })
   }, []);
+
+  return (
+    <div>Checkout Page</div>
+  )
 }
