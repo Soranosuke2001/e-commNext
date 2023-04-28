@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -30,10 +31,10 @@ export const authOptions = {
         await prisma.user.update({
           where: { id: user.id },
           data: { stripeCustomerId: customer.id },
-        })
+        });
       }
     },
   },
 };
 
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);
