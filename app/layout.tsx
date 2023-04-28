@@ -29,7 +29,6 @@ export default async function RootLayout({
       <body className={`mx-4 lg:mx-48 ${roboto.className}`}>
         <Hydrate>
           <Nav user={session?.user} expires={session?.expires as string} />
-          <h1>This is the home page</h1>
           {children}
         </Hydrate>
       </body>
