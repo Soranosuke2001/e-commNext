@@ -3,6 +3,7 @@
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { useCartStore } from "@/util/store";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -11,6 +12,7 @@ const stripePromise = loadStripe(
 export default function Checkout() {
   const cartStore = useCartStore();
   const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     // Create a PaymentIntent
@@ -24,13 +26,16 @@ export default function Checkout() {
         payment_intent_id: cartStore.paymentIntent,
       }),
     })
-      .then((res) => {
-        console.log(res)
-        // return res.json();
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("this is working");
+        console.log(data);
       })
+      .catch((err) => {
+        console.log("there was an error");
+        console.log(err);
+      });
   }, []);
 
-  return (
-    <div>Checkout Page</div>
-  )
+  return <div>Checkout Page</div>;
 }
